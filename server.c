@@ -5,6 +5,8 @@
 #include <poll.h>
 #include <unistd.h>
 
+#include <errno.h>
+
 int main(void) {
     //socket(int domain, int type, int protocol);
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -19,8 +21,16 @@ int main(void) {
         htons(9999),
         0
     };
+<<<<<<< HEAD
     //SERVER ONLY 
     bind(sockfd, (struct sockaddr *)&address, sizeof(address)); 
+=======
+    
+    if (bind(sockfd, (struct sockaddr *)&address, sizeof(address)) == -1 ) {
+        printf("Bind has failed! errno: %d\n", errno);
+        return 1;
+    }
+>>>>>>> main
     
     //SERVER ONLY 
     listen(sockfd, 10);
