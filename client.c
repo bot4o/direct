@@ -21,14 +21,15 @@ int main(void) {
     };
     //CLIENT ONLY    
     connect(sockfd, (struct sockaddr *)&address, sizeof(address));
-    //stdin - 0 "input from the user"
     struct pollfd fds[2] =  {
         {
+            //праща съобщение
             0,
             POLLIN,
             0
         },
         {
+            //получава съобщение
             sockfd,
             POLLIN,
             0

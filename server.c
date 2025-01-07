@@ -18,35 +18,33 @@ int main(void) {
    
     struct sockaddr_in address = {
         AF_INET,
-        htons(9999),
-        0
+        htons(9999), //Номер на порта
+        0 //IP address //0 = по default е localhost
     };
-<<<<<<< HEAD
-    //SERVER ONLY 
-    bind(sockfd, (struct sockaddr *)&address, sizeof(address)); 
-=======
+
+    //bind(sockfd, (struct sockaddr *)&address, sizeof(address)); 
     
+    //SERVER ONLY 
     if (bind(sockfd, (struct sockaddr *)&address, sizeof(address)) == -1 ) {
         printf("Bind has failed! errno: %d\n", errno);
         return 1;
     }
->>>>>>> main
     
     //SERVER ONLY 
     listen(sockfd, 10);
     
     //SEVER ONLY
-    //THE CLIENT
     int clientfd = accept(sockfd, 0, 0);
 
-    //stdin - 0 "input from the user"
     struct pollfd fds[2] =  {
         {
-            0,
-            POLLIN,
-            0
+            //праща съобщение
+            0,  //file descriptor
+            POLLIN, //event
+            0 //return event = pollin
         },
         {
+            //получава съобщение
             clientfd,
             POLLIN,
             0
